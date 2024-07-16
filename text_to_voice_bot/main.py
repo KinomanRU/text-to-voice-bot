@@ -8,6 +8,7 @@ import log_utils
 import proxy_utils
 from routers import router as main_router
 from dotenv import load_dotenv
+import garbage_utils
 
 log = logging.getLogger(name=__name__)
 load_dotenv()
@@ -26,6 +27,7 @@ async def main() -> Never:
 
 if __name__ == "__main__":
     print(datetime.now(), "Bot started")
+    garbage_utils.remove_voices()
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
@@ -34,3 +36,4 @@ if __name__ == "__main__":
         log.exception(str(err))
     finally:
         print(datetime.now(), "Bot stopped")
+        garbage_utils.remove_voices()
